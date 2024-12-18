@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+  margin: 0;
+  padding: 0;
+  
+  background-color: #f7f9fa;;
+}
+
+.container{
+  max-width: 750px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.header{
+  box-shadow: var(0 0 2px 0 rgba(0,0,0,.33));
+  background-color: #fff;
+  border-bottom: 1px solid gainsboro;
+}
+
+.header__inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo{
+  width: 60px;
+  height: 60px;
+}
+
+.header__title{
+  font-size: 20px;
+  font-family: Arial,sans-serif;
+  color: #3a475d;
+  
+}
+
+.gifts__list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.gifts__list a{
+  width: 451px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.gifts__item{
+  position: relative;
+}
+
+.gifts__item-box{
+  position: absolute;
+  bottom: 0;
+  color: white;
+  width: 100%;
+  background: #00000088;
+  padding: 10px 0;
+  text-align: center;
+  font: normal 14px Helvetica, Sans-Serif;
+}
+
+.gifts__img{
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.main{
+  position: relative;
+  z-index: 5;
+}
+
+
+.timer{
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  background-color: #fff;
+  box-shadow: 0 2px 11px 0 rgba(0,0,0,.07);
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.circular-progress{
+  position: relative;
+  height: 84px;
+  width: 84px;
+  border-radius: 50%;
+  background: conic-gradient(#ededed 0deg, #0095DA 3.6deg );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s all ease;
+}
+.circular-progress::before{
+  content: "";
+  position: absolute;
+  height: 72px;
+  transition: 0.4s all ease;
+  width: 72px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.progress-value{
+  position: relative;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: #0095DA;
+  min-width: 54px;
+
+
+}
+.progress-text{
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 17px;
+  margin-bottom: 5px;
+  color: #3a475d;
+}
+.mobile{
+  display: none;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 50px;
+  background: #fff;
+  border-radius: 5px;
+  width: min-content;
+  position: relative;
+  transition: all 5s ease-in-out;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+
+.popup .close {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup__title{
+  font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 24px;
+    margin: 0;
+
+    padding: 0 30px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.popup__subtitle{
+  font-size: 20px;
+    line-height: 32px;
+    text-align: center;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+.popup__subtitle b{
+  padding: 5px;
+  background-color: #3a475d;
+
+    border-radius: 7px;
+    color: #fff;
+
+    height: 26px;
+    min-width: 40px;
+    padding: 2px 10px;
+    white-space: nowrap;
+}
+
+.content{
+  display: flex;
+  gap: 40px;
+  align-items: self-start;
+}
+
+.content__left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content__left img:nth-child(2){
+  max-height: 60px;
+  margin: 30px 0px 20px;
+}
+
+.content__left-small{
+  color: rgb(197, 197, 197);
+font-size: 14px;
+
+    font-weight: 600;
+
+}
+.content__left{
+  width: 50%;
+}
+.content__right{
+  padding-right: 20px;
+  width: 50%;
+}
+.content__right-form{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.content__right-form input:first-child{
+  background-color: #efeff3;
+    border: 2px solid red;
+    border-radius: 1px;
+    box-shadow: none;
+    color: #3a475d;
+  padding: 0px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    height: 45px;
+    letter-spacing: -.2px;
+    line-height: 16px;
+    
+}
+.content__right-form input:nth-child(2).disabled{
+  background-color: #d9e2ed !important;
+}
+.content__right-form input:nth-child(2){
+  align-items: center;
+    background: none;
+    border: none;
+    border-radius: 1px;
+    box-shadow: none;
+    cursor: pointer;
+    display: flex;
+  color: #fff;
+  background-color: #059;
+    font-size: 16px;
+    font-weight: 600;
+    height: 46px;
+    justify-content: center;
+    margin: 0;
+    min-height: 30px;
+    outline: none;
+    padding: 3px 15px;
+    position: relative;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    transition: color .1s ease-in-out,background-color .1s ease-in-out,border-color .1s ease-in-out;
+}
+
+
+
+.content__right-small{
+  color: #b0b9c4;
+    font-size: 11px;
+    line-height: 1.4;
+    padding-right: 40px;
+}
+.content__right-small a{
+  color: #3a475d;
+  transition: 0.3s all ease;
+  text-decoration: none;
+}
+.content__right-small a:hover{
+  text-decoration: underline;
+}
+.content__right-text{
+  color: #3a475d;
+  font-size: 14px;
+  margin-top: 15px;
+    white-space: pre-line;
+    word-break: break-word;
+}
+
+.content__right-link{
+  color: #3a475d;
+  font-size: 16px;
+  text-decoration: none;
+}
+.content__right-link:hover{
+  text-decoration: underline;
+}
+
+
+
+@media  (max-width: 768px) {
+  .mobile{
+    display: block;
+  }
+  .none{
+    display: none;
+  }
+  .header__title{
+    font-size: 16px;
+    line-height: 140%;
+  }
+  .gifts__list a{
+    width: 100%;
+  }
+  .gifts__list{
+    margin-left: 70px;
+  }
+  .gifts__text{
+    padding: 0px 5px;
+  }
+  .overlay{
+    padding: 0px 20px;
+  }
+  .popup{
+    padding: 20px;
+  }
+  .content{
+    flex-direction: column;
+  }
+  .content__right{
+    padding-right: 0;
+    width: 100%;
+  }
+  .content__left{
+    width: 100%;
+  }
+  .content__left img:first-child{
+    width: 100%;
+    display: none;
+    min-width: 320px;
+  }
+  .content__left img:nth-child(2){
+   
+    margin: 0px 0px 10px;
+    min-width: 320px;
+  }
+ 
+  .content{
+    gap: 10px;
+  }
+  .popup__title{
+    font-size: 16px;
+  }
+  .popup__subtitle{
+    font-size: 14px;
+    margin: 10px 0px 20px;
+  }
+  .content__left-small{
+    font-size: 12px;
+    display: none;
+  }
+  .popup{
+  
+ 
+    top: 40%;
+    width: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  
+}
+
+    </style>
+    <title>Gifts</title>
+  </head>
+  <body>
+
+
+
+    <header class="header">
+      <div class="container header__inner">
+        <a href="index.html" class="logo">
+          <img src="images/present.svg" alt="" />
+        </a>
+        <span class="header__title">
+          Выберите одно бесплатное предложение.<br class="mobile"/> У вас есть 5 минут.
+        </span>
+      </div>
+    </header>
+
+    <main class="main">
+      
+
+        <section class="timer">
+          <span class="progress-text">Осталось <br />времени:</span>
+          <div class="circular-progress">
+            <span class="progress-value">05:00.00</span>
+          </div>
+        </section>
+    
+        <section class="gifts">
+          <div class="container">
+            <ul class="gifts__list">
+              <a href="#popup1">
+                <li class="gifts__item">
+                  <img src="images/gift10.jpg" alt="" class="gifts__img" />
+                  <div class="gifts__item-box">
+                    <span class="gifts__text"
+                      >Посещение новой программы University Buisness English</span
+                    >
+                  </div>
+                </li>
+              </a>
+              <a href="#popup1">
+                <li class="gifts__item">
+                  <img src="images/gift11.jpg" alt="" class="gifts__img" />
+                  <div class="gifts__item-box">
+                    <span class="gifts__text">Бизнес-Лекторий</span>
+                  </div>
+                </li>
+              </a>
+              <a href="#popup1">
+                <li class="gifts__item">
+                  <img src="images/gift12.jpg" alt="" class="gifts__img" />
+                  <div class="gifts__item-box">
+                    <span class="gifts__text"
+                      >Участие в конкурсе</span
+                    >
+                  </div>
+                </li>
+              </a>
+              <a href="#popup1">
+                <li class="gifts__item">
+                  <img src="images/gift13.jpg" alt="" class="gifts__img" />
+                  <div class="gifts__item-box">
+                    <span class="gifts__text"
+                      >Стажировка</span
+                    >
+                  </div>
+                </li>
+              </a>
+              <a href="#popup1">
+                <li class="gifts__item">
+                  <img src="images/gifts-5.jpg" alt="" class="gifts__img" />
+                  <div class="gifts__item-box">
+                    <span class="gifts__text"
+                      >Делай покупки легко через Сбермаркет</span
+                    >
+                  </div>
+                </li>
+              </a>
+              <a href="#popup1">
+                <li class="gifts__item">
+                  <img src="images/gift10.jpg" alt="" class="gifts__img" />
+                  <div class="gifts__item-box">
+                    <span class="gifts__text"
+                      >Быстрый онлайн заем в компании Деньги Сразу</span
+                    >
+                  </div>
+                </li>
+              </a>
+              <a href="#popup1">
+                <li class="gifts__item">
+                  <img src="images/gift11.jpg" alt="" class="gifts__img" />
+                  <div class="gifts__item-box">
+                    <span class="gifts__text">Свободный английский от Skyeng</span>
+                  </div>
+                </li>
+              </a>
+              <a href="#popup1">
+                <li class="gifts__item">
+                  <img src="images/gift12.jpg" alt="" class="gifts__img" />
+                  <div class="gifts__item-box">
+                    <span class="gifts__text"
+                      >Кешбэк 2000Р за покупки по карте Tinkoff Platinum</span
+                    >
+                  </div>
+                </li>
+              </a>
+              <a href="#popup1">
+                <li class="gifts__item">
+                  <img src="images/gift13.jpg" alt="" class="gifts__img" />
+                  <div class="gifts__item-box">
+                    <span class="gifts__text"
+                      >Заказывай онлайн в приложении самокат</span
+                    >
+                  </div>
+                </li>
+              </a>
+              <a href="#popup1">
+                <li class="gifts__item">
+                  <img src="images/gifts-5.jpg" alt="" class="gifts__img" />
+                  <div class="gifts__item-box">
+                    <span class="gifts__text"
+                      >Делай покупки легко через Сбермаркет</span
+                    >
+                  </div>
+                </li>
+              </a>
+            </ul>
+          </div>
+        </section>
+    </main>
+
+
+    <div id="popup1" class="overlay">
+      <div class="popup">
+        <h2 class="popup__title">Оставьте заявку здесь</h2>
+        <h4 class="popup__subtitle">Сегодня это предложение выбрали <b>24</b>
+          человека</h4>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+              <div class="content__left">
+                <img src="images/present.svg" alt="">
+                <img src="images/user2.png" alt="">
+              </div>
+              <div class="content__right">
+                <form action="" class="content__right-form">
+                  <input type="email" name="email" placeholder="Ваш email">
+                  <input type="submit" class="disabled" value="ПРИНЯТЬ ПОДАРОК" disabled>
+              </div>
+
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var timeElem = document.querySelector('.progress-value'), 
+        countdown = new Date(),
+        responseTime = new Date(Date.now() + (30000*10)); 
+ 
+      function startTime() {
+        console.log(Math.floor(countdown.getUTCMilliseconds()/10))
+        countdown.setTime(responseTime - Date.now());
+        timeElem.innerHTML = countdown.getUTCMinutes() + ':' + countdown.getUTCSeconds() + '.' + Math.floor(countdown.getUTCMilliseconds()/10)
+       
+        if(countdown.getUTCSeconds().toString().length == 1){
+         
+          timeElem.innerHTML = countdown.getUTCMinutes() + ':' + '0' + countdown.getUTCSeconds() + '.' + Math.floor(countdown.getUTCMilliseconds()/10)
+        }
+        if(Math.floor(countdown.getUTCMilliseconds()/10).toString().length == 1){
+          timeElem.innerHTML = countdown.getUTCMinutes() + ':' + countdown.getUTCSeconds() + '.' + '0' + Math.floor(countdown.getUTCMilliseconds()/10)
+          if(countdown.getUTCSeconds().toString().length == 1){
+       
+          timeElem.innerHTML = countdown.getUTCMinutes() + ':' + '0' + countdown.getUTCSeconds() + '.' + '0' +Math.floor(countdown.getUTCMilliseconds()/10)
+        }
+        }
+        if(countdown.getUTCHours() > 0 || countdown.getUTCMinutes() > 0 || countdown.getUTCSeconds() > 0) 
+        requestAnimationFrame(startTime);
+        if(countdown.getUTCSeconds() == 0){
+          timeElem.innerHTML = countdown.getUTCMinutes() + ':' + '0' + countdown.getUTCSeconds() + '.' + '00';
+        }
+      }
+      requestAnimationFrame(startTime);
+      let circularProgress = document.querySelector(".circular-progress"),
+        progressValue = document.querySelector(".progress-value");
+
+      let progressStartValue = 100,
+        progressEndValue = 0,
+        speed = 3000;
+
+      let progress = setInterval(() => {
+        progressStartValue--;
+
+        // progressValue.textContent = `${progressStartValue}%`;
+        circularProgress.style.background = `conic-gradient(#0095DA ${
+          progressStartValue * 3.6
+        }deg, #ededed 0deg)`;
+
+        if (progressStartValue == progressEndValue) {
+          clearInterval(progress);
+        }
+      }, speed);
+
+      // document.querySelector(".progress-value").innerHTML = 05 + ":" + 00;
+      // startTimer();
+
+      // function startTimer() {
+      //   var presentTime = document.querySelector(".progress-value").innerHTML;
+      //   var timeArray = presentTime.split(/[:]+/);
+      //   var m = timeArray[0];
+      //   var s = checkSecond(timeArray[1] - 1);
+      //   if (s == 59) {
+      //     m = m - 1;
+      //   }
+      //   if (m < 0) {
+      //     return;
+      //   }
+
+      //   document.querySelector(".progress-value").innerHTML = m + ":" + s;
+       
+      //   setTimeout(startTimer, 1000);
+      // }
+
+      // function checkSecond(sec) {
+      //   if (sec < 10 && sec >= 0) {
+      //     sec = "0" + sec;
+      //   } // add zero in front of numbers < 10
+      //   if (sec < 0) {
+      //     sec = "59";
+      //   }
+      //   return sec;
+      // }
+      const mailInp =  document.querySelector('.content__right-form input:nth-child(1)');
+      mailInp.addEventListener('input', ()=>{
+      if(mailInp.value.length > 0){
+        document.querySelector('.content__right-form input:nth-child(2)').classList.remove('disabled')
+      }
+      else{
+        document.querySelector('.content__right-form input:nth-child(2)').classList.add('disabled')
+      }
+    })
+
+    const click = document.querySelectorAll('.gifts__item');
+    for(let i of click){
+      i.addEventListener('click', ()=>{
+        document.querySelector('body').style = 'overflow: hidden'
+        document.querySelector('html').style = 'overflow: hidden'
+
+      })
+    }
+    document.querySelector('.close').addEventListener('click', ()=>{
+      document.querySelector('body').style = 'overflow: unset'
+        document.querySelector('html').style = 'overflow: unset'
+    })
+    
+    </script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>wheel</title>
+  </head>
+  <body>
+    <div class="wheel__box">
+      <img src="images/arrow.svg" alt="" class="arrow">
+      <div class="wheel__box-one">
+        <div class="question">
+          <svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill="#444444"
+              d="M9 11h-3c0-3 1.6-4 2.7-4.6 0.4-0.2 0.7-0.4 0.9-0.6 0.5-0.5 0.3-1.2 0.2-1.4-0.3-0.7-1-1.4-2.3-1.4-2.1 0-2.5 1.9-2.5 2.3l-3-0.4c0.2-1.7 1.7-4.9 5.5-4.9 2.3 0 4.3 1.3 5.1 3.2 0.7 1.7 0.4 3.5-0.8 4.7-0.5 0.5-1.1 0.8-1.6 1.1-0.9 0.5-1.2 1-1.2 2z"
+            ></path>
+            <path
+              fill="#444444"
+              d="M9.5 14c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="wheel__container">
+          <div class="one">1</div>
+          <div class="two">2</div>
+          <div class="three">6</div>
+          <div class="four">
+            <span style="transform: rotate(180deg)">4</span>
+          </div>
+          <div class="five">8</div>
+          <div class="six">3</div>
+          <div class="seven">7</div>
+          <div class="eight">5</div>
+        </div>
+      </div>
+
+      <span class="wheel__text active"
+        >Определяем количество доступных вам <br />
+        подарков</span
+      >
+      <span class="wheel__text">Поздравляем!</span><span class="wheel__text">Вам доступно 5 предложений!</span
+      ><span class="wheel__text">Выберите одно из них. У вас есть 5 минут.</span>
+      <a href="gift.html">
+
+        <button class="wheel__text">Получить подарок</button>
+      </a>
+    </div>
+    <div class="wheel__box">
+
+      <div class="wheel__box-one">
+        <div class="turn__center">
+          <img src="images/present.svg" alt="">
+        </div>
+
+        <div class="wheel__container turn">
+          <div class="one">
+            <img src="images/user2.png" class="wheel__container-img" alt="">
+
+          </div>
+          <div class="two" >
+            <img src="images/user2.png" class="wheel__container-img" alt="">
+
+          </div>
+          <div class="three">
+            <img src="images/user2.png" class="wheel__container-img" alt="">
+
+          </div>
+          <div class="four">
+    
+                <img src="images/user2.png" class="wheel__container-img" alt="">
+   
+          </div>
+          <div class="five">
+            <img src="images/user2.png" class="wheel__container-img" alt="">
+
+          </div>
+          <div class="six">
+            <img src="images/user2.png" class="wheel__container-img" alt="">
+
+          </div>
+          <div class="seven">
+            <img src="images/user2.png" class="wheel__container-img" alt="">
+
+          </div>
+          <div class="eight">
+                <img src="images/user2.png" class="wheel__container-img" alt="">
+            </div>
+        </div>
+      </div>
+
+      <span class="wheel__text active"
+        >Ваша очередь выбрать наступить через <n style="margin: 0px 5px;">8</n> секунд</span
+      >
+      <div class="progress-bar" style="--width: 0"></div>
+
+
+      
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
